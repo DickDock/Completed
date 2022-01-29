@@ -1,14 +1,13 @@
 server:
   address: 127.0.0.1
-  port: 8090
 
 spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/learn
-      username: root
-      password: lvshuo1234
+      username: learn
+      password: hkA4KRDHsmKb3BKL
 
 mybatis-plus:
   global-config:
