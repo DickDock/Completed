@@ -6,14 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ls.completed.domain.User;
 import com.ls.completed.mapper.UserMapper;
 import com.ls.completed.service.IUserService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-@AllArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
@@ -40,7 +36,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<User> getAll() {
-        return userMapper.selectList(null);
+    public IPage<User> getByPage(int currentPage, int pageSize) {
+        IPage<User> page = new Page<>(currentPage, pageSize);
+        userMapper.selectPage(page,null);
+        return page;
     }
 }

@@ -1,12 +1,16 @@
 package com.ls.completed.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ls.completed.domain.User;
 import com.ls.completed.service.IUserService;
 import com.ls.completed.util.VueDataTransForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -67,12 +71,27 @@ public class UserContorller {
     //获取所有用户
     @GetMapping
     public VueDataTransForm getAllUser() {
-        List<User> userList = iUserService.getAll();
+        List<User> userList = iUserService.list();
         VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "查询用户失败！");
         if (userList.size() > 0) {
             vueDataTransForm.setStatus(true);
             vueDataTransForm.setMsg("查询用户成功！");
             vueDataTransForm.setData(userList);
+        }
+        return vueDataTransForm;
+    }
+
+    //分页获取用户
+    @GetMapping("/pages/{currentPage}/{pageSize}")
+    public VueDataTransForm getUserByPage(@PathVariable int currentPage, @PathVariable int pageSize) {
+
+        IPage<User> iPage = iUserService.getByPage(currentPage, pageSize);
+
+        VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "查询用户失败！");
+        if (iPage.getRecords().size() > 0) {
+            vueDataTransForm.setStatus(true);
+            vueDataTransForm.setMsg("查询用户成功！");
+            vueDataTransForm.setData(iPage);
         }
         return vueDataTransForm;
     }
