@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.ls.completed.domain.User;
 import com.ls.completed.mapper.UserMapper;
+import com.ls.completed.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class UserFactoryTest {
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
 
     @Test
     void generateUsers() {
@@ -23,9 +24,9 @@ public class UserFactoryTest {
             user.setPhone(RandomUtil.randomNumbers(11));
             user.setQq(RandomUtil.randomNumbers(10));
             user.setRegistrationDate(DateUtil.now());
-            user.setPassWord(RandomUtil.randomString(15));
+            user.setPassWord(RandomUtil.randomString(10));
 
-            userMapper.insert(user);
+            userService.insertUser(user);
         }
     }
 
