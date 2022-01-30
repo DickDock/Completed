@@ -1,5 +1,6 @@
 package com.ls.completed.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,6 +18,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public int insertUser(User user) {
+        user.setPassWord(DigestUtil.md5Hex(user.getPassWord()));
         return userMapper.insert(user);
     }
 
@@ -30,6 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.deleteById(user.getId());
     }
 
+
     @Override
     public User findUserByName(String userName) {
         return userMapper.selectById(userName);
@@ -38,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public IPage<User> getByPage(int currentPage, int pageSize) {
         IPage<User> page = new Page<>(currentPage, pageSize);
-        userMapper.selectPage(page,null);
+        userMapper.selectPage(page, null);
         return page;
     }
 }
