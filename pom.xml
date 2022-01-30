@@ -63,6 +63,11 @@
             <artifactId>oshi-core</artifactId>
             <version>6.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.google-collections</groupId>
+            <artifactId>google-collect</artifactId>
+            <version>snapshot-20080530</version>
+        </dependency>
     </dependencies>
 
     <build>
