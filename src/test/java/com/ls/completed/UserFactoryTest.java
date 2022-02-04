@@ -23,7 +23,6 @@ public class UserFactoryTest {
             user.setEmail(RandomUtil.randomString(10) + "@qq.com");
             user.setPhone(RandomUtil.randomNumbers(11));
             user.setQq(RandomUtil.randomNumbers(10));
-            user.setRegistrationDate(DateUtil.now());
             user.setPassWord(RandomUtil.randomString(10));
 
             userService.insertUser(user);
