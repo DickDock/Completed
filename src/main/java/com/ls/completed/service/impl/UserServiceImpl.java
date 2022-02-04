@@ -24,8 +24,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public int updateUser(User user) {
-        System.out.println(user.toString());
-        System.out.println("提交的密码为 => " + user.getPassWord());
         if (user.getPassWord() == null) {
             System.out.println("传入密码为空");
         } else {

@@ -2,6 +2,7 @@ package com.ls.completed.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,6 @@ public class User {
     private Integer id;
     private String userName;
     private Boolean status;
-    @JsonIgnore
     private String passWord;
     private String email;
     private String phone;
@@ -24,4 +24,14 @@ public class User {
     //注解@TableField，fill属性，配置自动填充，在更新时，自动更新时间。默认是不处理的
     @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
+
+    @JsonIgnore
+    public String getPassWord() {
+        return passWord;
+    }
+
+    @JsonProperty
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
 }
