@@ -24,18 +24,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public int updateUser(User user) {
+        System.out.println(user.toString());
+        System.out.println("提交的密码为 => " + user.getPassWord());
+        if (user.getPassWord() == null) {
+            System.out.println("传入密码为空");
+        } else {
+            user.setPassWord(DigestUtil.md5Hex(user.getPassWord()));
+        }
         return userMapper.updateById(user);
     }
 
     @Override
     public int deleteUser(User user) {
         return userMapper.deleteById(user.getId());
-    }
-
-
-    @Override
-    public User findUserByName(String userName) {
-        return userMapper.selectById(userName);
     }
 
     @Override

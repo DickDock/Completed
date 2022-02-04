@@ -8,6 +8,5 @@ public interface IUserService extends IService<User> {
     int insertUser( User user );
     int updateUser( User user );
     int deleteUser( User user );
-    User findUserByName( String userName );
     IPage<User> getByPage(int currentPage,int pageSize);
 }
