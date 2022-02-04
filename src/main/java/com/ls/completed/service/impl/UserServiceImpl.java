@@ -1,6 +1,7 @@
 package com.ls.completed.service.impl;
 
 import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -42,5 +43,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         IPage<User> page = new Page<>(currentPage, pageSize);
         userMapper.selectPage(page, null);
         return page;
+    }
+
+    @Override
+    public Boolean loginByName(String username, String password) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("user_name", username);
+        User user = userMapper.selectOne(queryWrapper);
+
+        return user.getPassWord().equals(DigestUtil.md5Hex(password));
+    }
+
+    @Override
+    public Boolean loginByEmail(String username, String password) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("email", username);
+        User user = userMapper.selectOne(queryWrapper);
+
+        return user.getPassWord().equals(DigestUtil.md5Hex(password));
     }
 }
