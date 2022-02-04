@@ -68,6 +68,12 @@
             <artifactId>google-collect</artifactId>
             <version>snapshot-20080530</version>
         </dependency>
+        <!--Redis依赖-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
