@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/login")
@@ -33,40 +34,50 @@ public class LoginController {
         String userName = data.get("userName");
         String captchaID = data.get("captchaID");
 
-        if (verifyCode != null && passWd != null && userName != null && captchaID != null) {
+        if (!Objects.equals(verifyCode, "") && !Objects.equals(passWd, "") && !Objects.equals(userName, "") && !Objects.equals(captchaID, "")) {
             // 尝试Redis获取存储的验证码
             Jedis jedis = RedisDS.create().getJedis();
             String redisCapCode = jedis.get(captchaID);
             jedis.del(captchaID); // 取完即删除验证码
             jedis.close();
 
-            System.out.println("Reds存储验证码为 =>" + redisCapCode);
+            if (redisCapCode == null) {
+                return new VueDataTransForm(true, 200, "验证码失效，请刷新验证码！", "refreshCaptcha");
+            }
 
             // 比对验证码
-            if (redisCapCode != null && redisCapCode.equals(verifyCode)) {
+            if (redisCapCode.equals(verifyCode)) {
                 System.out.println("验证码比对正确");
+                // 判断是否为邮箱登录
+                // 验证码匹配成功才能进行登录
+                if (Validator.isEmail(data.get("userName"))) {
+                    System.out.println("邮箱登录");
+                    Boolean loginStatus = userService.loginByEmail(data.get("userName"), data.get("passWd"));
+                    System.out.println("登陆状态 => " + loginStatus);
+                    vueDataTransForm.setData(loginStatus);
+                    if (loginStatus) {
+                        vueDataTransForm.setStatus(true);
+                        vueDataTransForm.setMsg("登录成功");
+                    }
+                } else {
+                    System.out.println("用户名登录");
+                    Boolean loginStatus = userService.loginByName(data.get("userName"), data.get("passWd"));
+                    System.out.println("登陆状态 => " + loginStatus);
+                    vueDataTransForm.setData(loginStatus);
+                    if (loginStatus) {
+                        vueDataTransForm.setStatus(true);
+                        vueDataTransForm.setMsg("登录成功");
+                    }
+                }
             } else {
                 System.out.println("验证码比对不正确");
+                return new VueDataTransForm(true, 200, "验证码错误，请重试！", "captchaErr");
             }
-
-            // 判断是否为邮箱登录
-            if (Validator.isEmail(data.get("userName"))) {
-                System.out.println("邮箱登录");
-                Boolean loginStatus = userService.loginByEmail(data.get("userName"), data.get("passWd"));
-                System.out.println("登陆状态 => " + loginStatus);
-                vueDataTransForm.setData(loginStatus);
-                if (loginStatus) {
-                    vueDataTransForm.setMsg("登录成功");
-                }
-            } else {
-                System.out.println("用户名登录");
-                Boolean loginStatus = userService.loginByName(data.get("userName"), data.get("passWd"));
-                System.out.println("登陆状态 => " + loginStatus);
-                vueDataTransForm.setData(loginStatus);
-                if (loginStatus) {
-                    vueDataTransForm.setMsg("登录成功");
-                }
-            }
+        } else {
+            System.out.println("参数缺失！！");
+            vueDataTransForm.setStatus(true);
+            vueDataTransForm.setCode(200);
+            vueDataTransForm.setMsg("缺失参数，请重试！");
         }
 
         return vueDataTransForm;
