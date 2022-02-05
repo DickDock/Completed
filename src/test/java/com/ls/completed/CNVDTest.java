@@ -1,15 +1,24 @@
 package com.ls.completed;
 
+import cn.hutool.core.io.file.FileReader;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.ls.completed.domain.CNVD;
+import com.ls.completed.service.impl.CnvdServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 @SpringBootTest
 public class CNVDTest {
+    @Autowired
+    private CnvdServiceImpl cnvdService;
+
     @Test
     void runPyTest() {
         String pythonPath = "C:\\Users\\19482\\Desktop\\cnvd.py";
@@ -39,5 +48,19 @@ public class CNVDTest {
         }
         System.out.println(sbrs);
         System.out.println(sberror);
+    }
+
+    @Test
+    void testMysql() {
+        //默认UTF-8编码，可以在构造中传入第二个参数做为编码
+        FileReader fileReader = new FileReader("C:\\Users\\19482\\Desktop\\cnvd.json");
+        //从字符串解析JSON数组
+        String result = fileReader.readString();
+        JSONArray arr = JSON.parseArray(result);
+        for (Object n : arr) {
+            CNVD cnvd = JSON.parseObject(n.toString(), CNVD.class);
+            System.out.println(cnvd);
+            cnvdService.insertCnvd(cnvd);
+        }
     }
 }
