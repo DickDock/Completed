@@ -2,17 +2,13 @@ package com.ls.completed.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
-import cn.hutool.core.date.DateField;
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.db.nosql.redis.RedisDS;
-import cn.hutool.jwt.JWT;
-import cn.hutool.jwt.JWTPayload;
-import cn.hutool.jwt.JWTUtil;
 import com.ls.completed.service.impl.UserServiceImpl;
 import com.ls.completed.util.VueDataTransForm;
+import com.ls.completed.util.login.tokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +19,6 @@ import redis.clients.jedis.Jedis;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -78,7 +73,7 @@ public class LoginController {
                     }
                 }
                 // 创建一个 cookie对象
-                Cookie cookie = new Cookie("token", this.generateToken(userName));
+                Cookie cookie = new Cookie("token", tokenUtil.generateToken(userName));
 
                 //将cookie对象加入response响应
                 response.addCookie(cookie);
@@ -125,38 +120,5 @@ public class LoginController {
             e.printStackTrace();
         }
         return vueDataTransForm;
-    }
-
-    // 生成认证token
-    public String generateToken(String name) {
-        DateTime now = DateTime.now();
-        DateTime newTime = now.offsetNew(DateField.SECOND, 5);
-
-        Map<String, Object> payload = new HashMap<String, Object>();
-        //签发时间
-        payload.put(JWTPayload.ISSUED_AT, now);
-        //过期时间
-        payload.put(JWTPayload.EXPIRES_AT, newTime);
-        //生效时间
-        payload.put(JWTPayload.NOT_BEFORE, now);
-        //载荷
-        payload.put("userName", name + now);
-
-        String key = "wafasf";
-        return JWTUtil.createToken(payload, key.getBytes());
-    }
-
-    // 验证token
-    public Boolean cerifyToken(String token) {
-        String key = "wafasf";
-        JWT jwt = JWTUtil.parseToken(token);
-
-        boolean verifyKey = jwt.setKey(key.getBytes()).verify();
-        System.out.println(verifyKey);
-
-        boolean verifyTime = jwt.validate(0);
-        System.out.println(verifyTime);
-
-        return verifyKey && verifyTime;
     }
 }
