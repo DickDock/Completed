@@ -1,9 +1,9 @@
 package com.ls.completed.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @TableName("cnvds")
@@ -28,5 +28,11 @@ public class CNVD {
     private String updateDate;
     private String vulAttachment;
     private String platformCollectionDate;
-    private String fromWhere;
+    @TableField(value = "fr0m")
+    private String from;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+    //注解@TableField，fill属性，配置自动填充，在更新时，自动更新时间。默认是不处理的
+    @TableField(fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
 }

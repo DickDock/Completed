@@ -1,9 +1,8 @@
 package com.ls.completed;
 
 import cn.hutool.core.io.file.FileReader;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import com.ls.completed.domain.CNVD;
 import com.ls.completed.service.impl.CnvdServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @SpringBootTest
 public class CNVDTest {
@@ -56,9 +56,10 @@ public class CNVDTest {
         FileReader fileReader = new FileReader("C:\\Users\\19482\\Desktop\\cnvd.json");
         //从字符串解析JSON数组
         String result = fileReader.readString();
-        JSONArray arr = JSON.parseArray(result);
-        for (Object n : arr) {
-            CNVD cnvd = JSON.parseObject(n.toString(), CNVD.class);
+        JSONArray array = JSONUtil.parseArray(result);
+
+        List<CNVD> cnvdList = JSONUtil.toList(array, CNVD.class);
+        for (CNVD cnvd : cnvdList) {
             System.out.println(cnvd);
             cnvdService.insertCnvd(cnvd);
         }
