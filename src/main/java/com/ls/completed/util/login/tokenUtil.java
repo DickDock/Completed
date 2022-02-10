@@ -10,14 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class tokenUtil {
-    private static final String key = "wadasfa";
+    private static final String key = "washday";
     private static final DateTime now = DateTime.now();
     private static final DateTime newTime = now.offsetNew(DateField.SECOND, 5);
 
 
     // 生成认证token
     public static String generateToken(String name) {
-        Map<String, Object> payload = new HashMap<String, Object>();
+        Map<String, Object> payload = new HashMap<>();
         //签发时间
         payload.put(JWTPayload.ISSUED_AT, now);
         //过期时间
