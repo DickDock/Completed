@@ -9,9 +9,6 @@ public class VueDataTransForm {
     private String msg;
     private Object data;
 
-    public VueDataTransForm() {
-    }
-
     public VueDataTransForm(Boolean status, Integer code, String msg, Object data) {
         this.status = status;
         this.code = code;
