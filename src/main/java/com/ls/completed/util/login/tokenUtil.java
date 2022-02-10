@@ -31,7 +31,7 @@ public class tokenUtil {
     }
 
     // 验证token
-    public static Boolean cerifyToken(String token) {
+    public static Boolean verifyToken(String token) {
         JWT jwt = JWTUtil.parseToken(token);
 
         boolean verifyKey = jwt.setKey(key.getBytes()).verify();
