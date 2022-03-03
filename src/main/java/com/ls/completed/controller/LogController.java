@@ -23,10 +23,10 @@ public class LogController {
 
         IPage<Log> iPage = iLogService.getByPage(currentPage, pageSize);
 
-        VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "查询用户失败！");
+        VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "查询日志信息失败！");
         if (iPage.getRecords().size() > 0) {
             vueDataTransForm.setStatus(true);
-            vueDataTransForm.setMsg("查询用户成功！");
+            vueDataTransForm.setMsg("查询日志信息成功！");
             vueDataTransForm.setData(iPage);
         }
         return vueDataTransForm;
