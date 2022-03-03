@@ -12,6 +12,10 @@ public class Log {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String reqUrl;
+    private String reqMethod;
+    private String reqArgs;
+    private String reqMethodName;
+    private String reqClass;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.UPDATE)

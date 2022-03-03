@@ -14,38 +14,35 @@
  Date: 03/03/2022 16:57:21
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- ----------------------------
 -- Table structure for cnvds
 -- ----------------------------
 DROP TABLE IF EXISTS `cnvds`;
 CREATE TABLE `cnvds`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cve_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `cnvd_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_rank` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_level` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_range` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `ref_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_solution` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `official_patch_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `verify_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `public_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `report_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `collection_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `update_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `vul_attachment` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `platform_collection_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `fr0m` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `cve_id` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `cnvd_id` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_name` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_rank` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_level` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_range` varchar(500) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_detail` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_type` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `ref_url` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_solution` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `official_patch_info` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `verify_message` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `public_date` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `report_date` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `collection_date` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `update_date` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `vul_attachment` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `platform_collection_date` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
+  `fr0m` varchar(255) CHARACTER SET utf8  DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 49 CHARACTER SET = utf8;
 
 -- ----------------------------
 -- Records of cnvds
@@ -109,7 +106,7 @@ CREATE TABLE `logs`  (
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8;
 
 -- ----------------------------
 -- Records of logs
@@ -121,18 +118,18 @@ CREATE TABLE `logs`  (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
   `status` tinyint(4) NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `qq` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `wechart` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `pass_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `qq` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `wechart` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `pass_word` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
+  `salt` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 500 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 500 CHARACTER SET = utf8mb4;
 
 -- ----------------------------
 -- Records of users
