@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Objects;
@@ -28,7 +29,7 @@ public class LoginController {
     private UserServiceImpl userService;
 
     @PostMapping
-    public VueDataTransForm doLogin(@RequestBody HashMap<String, String> data, HttpServletResponse response) {
+    public VueDataTransForm doLogin(@RequestBody HashMap<String, String> data, HttpServletRequest request, HttpServletResponse response) {
         VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "登录失败！");
         System.out.println("登陆数据 =>" + data);
 

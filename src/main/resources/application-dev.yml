@@ -4,10 +4,10 @@ server:
 spring:
   datasource:
     druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://localhost:3306/learn
       username: root
-      password: root
+      password: yujian520
 
 mybatis-plus:
   global-config:
