@@ -24,7 +24,6 @@ public class LogDoInterceptor implements HandlerInterceptor {
         Log log = new Log();
         log.setReqUrl(String.valueOf(request.getRequestURL()));
 
-
         return true;
     }
 }
