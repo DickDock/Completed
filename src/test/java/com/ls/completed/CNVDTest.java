@@ -22,7 +22,7 @@ public class CNVDTest {
     @Test
     void runPyTest() {
         String pythonPath = "C:\\Users\\19482\\Desktop\\cnvd.py";
-        String[] arguments = new String[]{"python", pythonPath, "2022-02-01"};//指定命令、路径、传递的参数
+        String[] arguments = new String[]{"python", pythonPath, "2022-03-01"};//指定命令、路径、传递的参数
         StringBuilder sbrs = null;
         StringBuilder sberror = null;
         try {
@@ -46,8 +46,21 @@ public class CNVDTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(sbrs);
-        System.out.println(sberror);
+        System.out.println("脚本输出信息：" + sbrs);
+        System.out.println("脚本错误信息：" + sberror);
+
+        // 加载脚本输出内容并进行入库操作
+        try {
+            JSONArray array = JSONUtil.parseArray(sbrs);
+
+            List<CNVD> cnvdList = JSONUtil.toList(array, CNVD.class);
+            for (CNVD cnvd : cnvdList) {
+                System.out.println(cnvd);
+                cnvdService.insertCnvd(cnvd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
