@@ -17,7 +17,7 @@ public class LogController {
     @Autowired
     private ILogService iLogService;
 
-    //分页获取用户
+    //分页获取日志
     @GetMapping("/pages/{currentPage}/{pageSize}")
     public VueDataTransForm getLogByPage(@PathVariable int currentPage, @PathVariable int pageSize) {
 

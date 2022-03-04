@@ -29,7 +29,7 @@ public class CNVD {
     private String vulAttachment;
     private String platformCollectionDate;
     @TableField(value = "fr0m")
-    private String from;
+    private String fr0m;
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     //注解@TableField，fill属性，配置自动填充，在更新时，自动更新时间。默认是不处理的
