@@ -21,4 +21,24 @@ public class VueDataTransForm {
         this.msg = msg;
         this.code = 200;
     }
+
+    public VueDataTransForm setStatus(Boolean status) {
+        this.status = status;
+        return this;
+    }
+
+    public VueDataTransForm setCode(Integer code) {
+        this.code = code;
+        return this;
+    }
+
+    public VueDataTransForm setMsg(String msg) {
+        this.msg = msg;
+        return this;
+    }
+
+    public VueDataTransForm setData(Object data) {
+        this.data = data;
+        return this;
+    }
 }
