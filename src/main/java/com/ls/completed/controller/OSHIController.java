@@ -47,9 +47,10 @@ public class OSHIController {
 
     /**
      * 获取进程的信息
+     *
      * @return
      */
-        @GetMapping("/process")
+    @GetMapping("/process")
     public VueDataTransForm getProcess() {
         HashMap<String, Object> map = new HashMap<>();
         //1.物理（核心）和逻辑（超线程）CPU，处理器组，NUMA节点
@@ -75,6 +76,7 @@ public class OSHIController {
 
     /**
      * 获取内存信息
+     *
      * @return
      */
     @GetMapping("/memory")
@@ -83,7 +85,7 @@ public class OSHIController {
         GlobalMemory memory = OshiUtil.getMemory();
         double available = Double.valueOf(memory.getAvailable());
         double total = Double.valueOf(memory.getTotal());
-        double res = available / total  * 100d;
+        double res = available / total * 100d;
         //使用百分比
         String result = "%" + df.format(res);
         //可用内存
@@ -101,6 +103,7 @@ public class OSHIController {
 
     /**
      * 获取挂载的磁盘的信息
+     *
      * @return
      */
     @GetMapping("/disk")
@@ -133,6 +136,7 @@ public class OSHIController {
 
     /**
      * 获取CPU信息
+     *
      * @return
      */
     @GetMapping("/cpu")
@@ -150,15 +154,9 @@ public class OSHIController {
         return vueDataTransForm;
     }
 
-
-
-
     private String byteToMb(long value) {
         double val = Double.valueOf(value);
         String result = df.format(val / 1024 / 1024 / 1024) + "G";
         return result;
     }
-
-
-
 }

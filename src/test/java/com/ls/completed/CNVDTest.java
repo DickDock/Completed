@@ -22,7 +22,7 @@ public class CNVDTest {
     @Test
     void runPyTest() {
         String pythonPath = "C:\\Users\\19482\\Desktop\\cnvd.py";
-        String[] arguments = new String[]{"python", pythonPath, "2022-03-04"};//指定命令、路径、传递的参数
+        String[] arguments = new String[]{"python", pythonPath, "2022-03-06"};//指定命令、路径、传递的参数
         StringBuilder sbrs = null;
         StringBuilder sberror = null;
         try {
