@@ -52,6 +52,25 @@ public class UserController {
         return vueDataTransForm;
     }
 
+    /**
+     * @author 玖兔子陆
+     * @TODO 批量删除用户
+     * @param idList
+     * @return vueDataTransForm
+     */
+    @DeleteMapping("/batchRemove")
+    public VueDataTransForm batchRemoveById(@RequestBody List<Integer> idList) {
+        boolean flag = iUserService.removeByIds(idList);
+        VueDataTransForm vueDataTransForm = new VueDataTransForm(false, "批量删除用户失败！");
+        if (flag) {
+            vueDataTransForm.setStatus(true);
+            vueDataTransForm.setMsg("批量删除用户成功！");
+        }
+        return vueDataTransForm;
+
+    }
+
+
     // 查单个用户
     @GetMapping("/{id}")
     public VueDataTransForm getUserByID(@PathVariable Integer id) {
