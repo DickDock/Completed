@@ -65,7 +65,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.7.20</version>
+            <version>5.7.22</version>
         </dependency>
         <!--        OSHI获取系统信息-->
         <dependency>
@@ -92,6 +92,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.3</version>
                 <configuration>
                     <excludes>
                         <exclude>
