@@ -1,7 +1,6 @@
 package com.ls.completed.kafka;
 
 import cn.hutool.core.codec.Base64;
-import cn.hutool.core.util.EscapeUtil;
 import cn.hutool.json.JSONObject;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -22,6 +21,5 @@ public class KafkaConsumer {
             ack.acknowledge();
             System.out.println("处理掉解析失败数据");
         }
-//        ack.acknowledge();
     }
 }
